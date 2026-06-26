@@ -1,0 +1,46 @@
+/* Structure of linked list Node
+class Node {
+  public:
+    int data;
+    Node* next;
+
+    Node(int val) {
+        data = val;
+        next = nullptr;
+    }
+};
+*/
+class Solution {
+  public:
+    void removeLoop(Node* head) {
+        // code here
+        unordered_set<Node*> st;
+        bool ans=false;
+        if(head==NULL)
+        {
+            return;
+        }
+        
+        Node* temp=head;
+        st.insert(temp);
+        
+        while(temp!=NULL)
+        {
+            if(st.find(temp->next)!=st.end())
+            {
+              ans=true;
+              temp->next=NULL;
+              break;
+                
+                
+            }
+            
+            temp=temp->next;
+            if(temp!=NULL)
+            st.insert(temp);
+        }
+      
+       
+    }
+
+};
