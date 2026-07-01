@@ -1,0 +1,28 @@
+#include<iostream>
+
+
+int gcd(int a,int b)
+{   
+   //euclidean algo
+   //divide larger no via smaller untill smaller become 0
+   //based on gap method i.e if a no divies a,b it also divides the diff b/w them
+    while(b!=0)
+    {
+        int c=b;
+        b=a%b;
+        a=c;    
+    }
+    return a;
+}
+
+int main()//
+{
+    int a,b;
+    std::cin>>a>>b;
+
+    int hfc=gcd(a,b);
+
+    std::cout<<"Greatest common divisor= "<<hfc;
+
+
+}
