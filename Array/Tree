@@ -1,1 +1,94 @@
+#include <iostream>
 
+// Definition of a Binary Tree Node
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+
+    // Constructor to initialize a new node
+    Node(int val) {
+        data = val;
+        left = nullptr;
+        right = nullptr;
+    }
+};
+
+// 1. Pre-order Traversal: Root -> Left -> Right
+void printPreOrder(Node* root) {
+    if (root == nullptr) return;
+
+    // Process the current (root) node
+    std::cout << root->data << " ";
+    
+    // Recur on the left subtree
+    printPreOrder(root->left);
+    
+    // Recur on the right subtree
+    printPreOrder(root->right);
+}
+
+// 2. In-order Traversal: Left -> Root -> Right
+void printInOrder(Node* root) {
+    if (root == nullptr) return;
+
+    // Recur on the left subtree
+    printInOrder(root->left);
+    
+    // Process the current (root) node
+    std::cout << root->data << " ";
+    
+    // Recur on the right subtree
+    printInOrder(root->right);
+}
+
+// 3. Post-order Traversal: Left -> Right -> Root
+void printPostOrder(Node* root) {
+    if (root == nullptr) return;
+
+    // Recur on the left subtree
+    printPostOrder(root->left);
+    
+    // Recur on the right subtree
+    printPostOrder(root->right);
+    
+    // Process the current (root) node
+    std::cout << root->data << " ";
+}
+
+int main() {
+    /* 
+        Constructing the following sample binary tree:
+                 1
+               /   \
+              2     3
+             / \
+            4   5
+    */
+    Node* root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->left->left = new Node(4);
+    root->left->right = new Node(5);
+
+    std::cout << "DFS Pre-order Traversal:  ";
+    printPreOrder(root);
+    std::cout << "\n";
+
+    std::cout << "DFS In-order Traversal:   ";
+    printInOrder(root);
+    std::cout << "\n";
+
+    std::cout << "DFS Post-order Traversal: ";
+    printPostOrder(root);
+    std::cout << "\n";
+
+    // Clean up memory (Optional but good practice)
+    delete root->left->left;
+    delete root->left->right;
+    delete root->left;
+    delete root->right;
+    delete root;
+
+    return 0;
+}
