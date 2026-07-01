@@ -1,0 +1,42 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    // Optimize standard I/O 
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<int> arr(n);
+        for (int i = 0; i < n; i++) {
+            cin >> arr[i];
+        }
+        
+        unordered_map<int, int> mp;
+        mp[0] = -1; // Base case for subarray starting from index 0
+        int maxlen = 0;
+        int sum = 0;
+        
+        for (int i = 0; i < n; i++) {
+            // Treat even numbers as +1 and odd numbers as -1
+            sum += (arr[i] % 2 == 0 ? 1 : -1);
+            
+            if (mp.find(sum) != mp.end()) {
+                maxlen = max(maxlen, i - mp[sum]);
+            } else {
+                // ONLY store the index if the sum is seen for the first time
+                mp[sum] = i;
+            }
+        }
+        cout << maxlen << "\n"; // Added  a newline for multiple test cases
+    }
+    return 0;
+}
