@@ -1,0 +1,28 @@
+#include <iostream>
+#include <vector>
+#include <string>
+
+using namespace std;
+
+vector<int> manualParse(string s) {
+    vector<int> nums;
+    string temp = "";
+    
+    for (int i = 0; i < s.length(); i++) {
+        // If the character is a digit or a minus sign
+        if (isdigit(s[i]) || s[i] == '-') {
+            temp += s[i]; // Keep adding digits to form the number
+        } 
+        // If we hit a non-digit (like a comma, space, bracket)
+        else {
+            if (!temp.empty()) {
+                nums.push_back(stoi(temp)); // Convert string to int
+                temp = ""; // Reset the temporary string
+            }
+        }
+    }
+    // Add the last number if it exists
+    if (!temp.empty()) nums.push_back(stoi(temp));
+    
+    return nums;
+}
