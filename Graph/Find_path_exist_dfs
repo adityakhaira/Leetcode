@@ -1,0 +1,41 @@
+class Solution {
+   bool dfs(int source ,vector<vector<int>>&adj, vector<bool>&visited, int destination)
+   {
+    if(source==destination)
+    return true;
+
+    int node=source;
+
+    
+    visited[node]=true;
+
+    for(auto e: adj[node])
+    {
+        if(!visited[e]){
+        if(dfs(e,adj,visited,destination))   // returns true to previous call
+        return true;
+        }
+    }
+
+    return false;
+
+   } 
+public:
+    bool validPath(int n, vector<vector<int>>& edges, int source, int destination) {
+
+    vector<vector<int>> adj(n);
+    vector<bool> visited(n,false);
+    visited[source]=true;
+
+    for(auto e : edges)
+    {       
+        adj[e[0]].push_back(e[1]);
+        adj[e[1]].push_back(e[0]);
+    }
+
+    return dfs(source,adj,visited,destination);
+
+
+    
+  }
+};
