@@ -1,4 +1,4 @@
-/* Structure of linked list Node
+/* Structure of linked list 
 class Node {
   public:
     int data;
