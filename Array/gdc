@@ -1,6 +1,6 @@
 #include<iostream>
 
-// gcd
+// gcd 
 
 
 int gcd(int a,int b)
