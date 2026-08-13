@@ -20,7 +20,7 @@ public:
             mark.insert(curr);
             curr=curr->next;
         }
-        return false;*/
+        return false;
         // slow fast pointer method no extra space
         ListNode*  slow=head;
         ListNode*  fast=head;
