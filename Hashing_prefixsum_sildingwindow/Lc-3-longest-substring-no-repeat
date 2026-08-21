@@ -1,4 +1,4 @@
-//longest substring without
+//longest substring without hh
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
