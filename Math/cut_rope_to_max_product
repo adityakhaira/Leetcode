@@ -1,4 +1,4 @@
-// max product 
+// max product of
 class Solution {
   public:
     int maxProduct(int n) {
