@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    void f(string &s,string sum, int i, vector<string> &arr){
+        if(i == s.size()) {
+            arr.push_back(sum) ;
+            return ;
+        }
+
+        f(s,sum+s[i],i+1,arr);
+        f(s,sum,i+1,arr) ;
+    }
+    vector<string> powerSet(string s) {
+
+        vector<string> arr ;
+        f(s,"",0,arr);
+
+        return arr ;
+    }
+};
