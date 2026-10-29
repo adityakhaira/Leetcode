@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    bool isBST1(Node* root, long long minVal, long long maxVal) {
+        if (!root) return true;
+
+        // Check if current node's data violates the min/max constraints
+        if (root->data <= minVal || root->data >= maxVal) return false;
+
+        // Recursively check left and right subtrees with updated bounds
+        return isBST1(root->left, minVal, root->data) && 
+               isBST1(root->right, root->data, maxVal);
+    }
+
+    // Function to check whether a Binary Tree is BST or not.
+    bool isBST(Node* root) {
+        // Use LONG_MIN and LONG_MAX to handle edge cases where node data equals INT_MIN/INT_MAX
+        return isBST1(root, LLONG_MIN, LLONG_MAX);
+    }
+};
