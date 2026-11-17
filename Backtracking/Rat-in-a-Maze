@@ -1,0 +1,51 @@
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+class Solution {
+    void solve(int r, int c, vector<vector<int>>& mat, int n, string& path, 
+               vector<string>& ans, vector<vector<bool>>& visited) {
+        // Base case: Reached destination
+        if (r == n - 1 && c == n - 1) {
+            ans.push_back(path);
+            return;
+        }
+
+        // Directions: Down, Left, Right, Up (lexicographical order if preferred: D, L, R, U)
+        string dir = "DLRU";
+        int dr[] = {1, 0, 0, -1};
+        int dc[] = {0, -1, 1, 0};
+
+        visited[r][c] = true;
+
+        for (int i = 0; i < 4; i++) {
+            int nextR = r + dr[i];
+            int nextC = c + dc[i];
+
+            if (nextR >= 0 && nextC >= 0 && nextR < n && nextC < n && 
+                !visited[nextR][nextC] && mat[nextR][nextC] == 1) {
+                path.push_back(dir[i]);
+                solve(nextR, nextC, mat, n, path, ans, visited);
+                path.pop_back(); // Backtrack
+            }
+        }
+
+        visited[r][c] = true; // Unmark during backtrack
+        visited[r][c] = false;
+    }
+
+public:
+    vector<string> findPath(vector<vector<int>>& mat) {
+        int n = mat.size();
+        vector<string> ans;
+        vector<vector<bool>> visited(n, vector<bool>(n, false));
+        string path = "";
+
+        if (mat[0][0] == 1 && mat[n - 1][n - 1] == 1) {
+            solve(0, 0, mat, n, path, ans, visited);
+        }
+        return ans;
+    }
+};
